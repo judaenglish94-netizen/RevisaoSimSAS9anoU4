@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado SAS - Língua Inglesa (9º Ano)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Dark blue background */
+            color: #ffffff;
+        }
+
+        /* Red styled border container */
+        .sas-card {
+            background-color: #ffffff;
+            border: 3px solid #dc2626; /* Solid red border */
+            border-radius: 1rem;
+            color: #000000;
+        }
+
+        /* Red custom scrollbar */
+        .red-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .red-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .red-scrollbar::-webkit-scrollbar-thumb {
+            background: #dc2626;
+            border-radius: 4px;
+        }
+        .red-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+
+        /* Red buttons */
+        .btn-sas-red {
+            background-color: #dc2626;
+            color: #ffffff !important;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-sas-red:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Secondary Red Border Buttons */
+        .btn-sas-outline {
+            background-color: #ffffff;
+            color: #dc2626 !important;
+            border: 2px solid #dc2626;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-sas-outline:hover {
+            background-color: #fef2f2;
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col justify-between antialiased">
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-30 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <button id="toggle-sidebar-btn" class="p-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <span class="bg-red-600 text-white font-extrabold px-2.5 py-1 rounded text-xs tracking-wider uppercase">SAS</span>
+                    <h1 class="text-base sm:text-lg font-bold text-white">Simulado de Língua Inglesa — 9º Ano</h1>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <span class="text-xs text-slate-400 block sm:inline">Valor Total:</span>
+                <span class="text-sm font-bold text-red-500">8,0 Pontos</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden p-3 sm:p-6 gap-6">
+        
+        <!-- Lateral Sidebar Menu (Questions 1 to 10) -->
+        <aside id="sidebar" class="w-64 bg-slate-800 rounded-xl p-4 flex flex-col justify-between shrink-0 transition-all duration-300 border border-slate-700">
+            <div>
+                <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-700">
+                    <h2 class="font-bold text-sm text-white uppercase tracking-wider">Questões (1–10)</h2>
+                    <span id="answered-count" class="text-xs font-semibold text-red-400">0/10 respondidas</span>
+                </div>
+                
+                <!-- Grid 1-10 -->
+                <div class="grid grid-cols-5 gap-2" id="nav-grid">
+                    <!-- Dynamic question buttons -->
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-700">
+                <button id="finish-quiz-btn" class="w-full py-2.5 px-4 btn-sas-red rounded-lg text-sm flex items-center justify-center space-x-2 shadow-lg">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>Finalizar e Ver Nota</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Question Container -->
+        <main class="flex-1 overflow-y-auto flex flex-col justify-between">
+            
+            <div id="quiz-view" class="w-full max-w-3xl mx-auto">
+                
+                <!-- STICKY READING TEXT BOX FOR QUESTIONS 1 & 2 -->
+                <div id="reading-box-pollution" class="sas-card p-5 mb-6 hidden">
+                    <div class="flex items-center justify-between pb-2 mb-3 border-b border-red-200">
+                        <span class="font-bold text-red-600 text-xs sm:text-sm uppercase tracking-wide">
+                            <i class="fa-solid fa-file-lines mr-1.5"></i>Texto de Apoio (Questões 1 e 2)
+                        </span>
+                        <span class="text-xs text-slate-500 italic">Role para ler mais</span>
+                    </div>
+                    <div class="max-h-48 overflow-y-auto red-scrollbar pr-3 text-black text-xs sm:text-sm leading-relaxed space-y-3">
+                        <p class="font-semibold text-center text-slate-900">Global Environmental Challenges and Possible Solutions</p>
+                        <p>
+                            According to a report by the World Health Organization (WHO), nearly 99% of the global population breathes air that exceeds safety limits. In 2021 alone, ambient and household air pollution caused around 6.6 million premature deaths worldwide. Environmental scientists from the International Union for Conservation of Nature (IUCN) also estimate that between 15% and 31% of all microplastics in the ocean originate from primary land-based sources, such as synthetic clothing and vehicle tire wear. These scientific data demonstrate that toxic emissions and industrial waste present severe risks to human health and natural ecosystems across the entire planet.
+                        </p>
+                        <p>
+                            However, environmental experts emphasize that this situation can be significantly improved under specific technical and political conditions. For instance, if governments implemented strict clean energy policies and invested in public electric transportation, urban air pollution would drop by up to 45% within a decade. Furthermore, if global industries reduced plastic packaging production by 5% each year, microplastic accumulation in marine environments would stabilize before the end of the century. Therefore, resolving environmental degradation requires international cooperation, enforcement of ecological laws, and immediate industrial structural changes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STICKY READING TEXT BOX FOR QUESTION 3 -->
+                <div id="reading-box-poem" class="sas-card p-5 mb-6 hidden">
+                    <div class="flex items-center justify-between pb-2 mb-3 border-b border-red-200">
+                        <span class="font-bold text-red-600 text-xs sm:text-sm uppercase tracking-wide">
+                            <i class="fa-solid fa-feather-pointed mr-1.5"></i>Poema de Apoio (Questão 3)
+                        </span>
+                    </div>
+                    <div class="text-black text-sm sm:text-base leading-relaxed text-center font-serif py-2 bg-slate-50 rounded-lg border border-red-100">
+                        <p class="font-bold text-slate-900 mb-1">Desillusion</p>
+                        <p class="italic text-xs text-slate-600 mb-3">By an Anonymous Romantic Poet</p>
+                        <p class="text-slate-800">Cold is the earth where selfish hearts abide,</p>
+                        <p class="font-semibold text-red-700">If love returned, dark grief would step aside.</p>
+                    </div>
+                </div>
+
+                <!-- MAIN QUESTION SAS CARD -->
+                <div class="sas-card p-6 sm:p-8 mb-6 shadow-xl">
+                    <!-- Question Header -->
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+                        <span id="question-number-badge" class="bg-red-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">
+                            Questão 01
+                        </span>
+                        <span id="question-val" class="text-xs font-semibold text-slate-600">
+                            Valor: 0,8 ponto
+                        </span>
+                    </div>
+
+                    <!-- Enunciado (In Portuguese, clean) -->
+                    <div id="question-enunciado" class="text-black text-sm sm:text-base font-medium mb-6 leading-relaxed">
+                        Carregando questão...
+                    </div>
+
+                    <!-- Options List (A to E) -->
+                    <div id="options-container" class="space-y-3 mb-6">
+                        <!-- Dynamic options -->
+                    </div>
+
+                    <!-- Feedback Box (Shown after checking) -->
+                    <div id="feedback-box" class="p-4 rounded-lg hidden transition-all border">
+                        <div class="flex items-start space-x-3">
+                            <i id="feedback-icon" class="fa-solid text-lg mt-0.5"></i>
+                            <div>
+                                <h4 id="feedback-title" class="font-bold text-sm mb-1"></h4>
+                                <p id="feedback-message" class="text-xs sm:text-sm leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mandatory Button Layout Order: NEXT, CHECK, PREVIOUS -->
+                <div class="flex flex-row items-center justify-between gap-3">
+                    <div class="flex items-center space-x-3">
+                        <!-- 1. NEXT BUTTON -->
+                        <button id="next-btn" class="px-6 py-2.5 btn-sas-red rounded-lg text-sm shadow flex items-center space-x-2">
+                            <span>Next</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <!-- 2. CHECK BUTTON -->
+                        <button id="check-btn" class="px-6 py-2.5 btn-sas-red rounded-lg text-sm shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Check</span>
+                        </button>
+                    </div>
+
+                    <!-- 3. PREVIOUS BUTTON -->
+                    <button id="prev-btn" class="px-6 py-2.5 btn-sas-red rounded-lg text-sm shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Previous</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Report Screen (Grade out of 8.0) -->
+            <div id="report-screen" class="w-full max-w-3xl mx-auto hidden">
+                <!-- Final results rendered dynamically -->
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // 10 SAS-Style Questions Data (Grade out of 8.0, 0.8 points each)
+        // Correct answers randomized across A, B, C, D, E:
+        // Q1: D (3), Q2: A (0), Q3: E (4), Q4: B (1), Q5: D (3), Q6: A (0), Q7: C (2), Q8: E (4), Q9: C (2), Q10: A (0)
+        const questionsData = [
+            // Q1: Reading Pollution - Main Objective (Correct: D)
+            {
+                id: 1,
+                enunciado: "Ao analisar a estruturação das informações no texto, percebe-se que o autor organiza as evidências científicas e as propostas ecológicas com um propósito comunicativo específico. O objetivo principal do texto é:",
+                options: [
+                    "A) Demonstrar a ineficácia das políticas ecológicas atuais diante de dados estatísticos irreversíveis de contaminação atmosférica e marinha.",
+                    "B) Alertar os leitores sobre como as escolhas individuais de consumo de plásticos e transportes são as únicas causadoras de mortes prematuras no mundo.",
+                    "C) Provar cientificamente que a poluição do ar e o acúmulo de microplásticos já atingiram seus níveis máximos e tendem a se estabilizar naturalmente até o fim do século.",
+                    "D) Sensibilizar o leitor sobre a urgência do problema ambiental, apresentando dados de degradação e condicionando a mitigação à adoção de medidas governamentais e industriais.",
+                    "E) Exigir a substituição imediata de toda a frota global de veículos a combustível fóssil como a única solução viável para combater as doenças respiratórias."
+                ],
+                correct: 3, // D
+                explanation: "O texto inicia apresentando estatísticas da OMS e IUCN para contextualizar a gravidade da poluição e, no segundo parágrafo, usa estruturas condicionais (if) para demonstrar que a solução depende diretamente de ações governamentais e industriais."
+            },
+            // Q2: Reading Pollution - Imaginary/Conditional Scenario (Correct: A)
+            {
+                id: 2,
+                enunciado: "No texto, são utilizadas diferentes estruturas linguísticas para relatar fatos comprovados e para construir cenários de possibilidade ou projeções hipotéticas. Assinale a alternativa que contém uma oração extraída do texto que expressa uma situação imaginária ou condicional:",
+                options: [
+                    "A) \"...if governments implemented strict clean energy policies and invested in public electric transportation...\"",
+                    "B) \"According to a report by the World Health Organization (WHO), nearly 99% of the global population breathes air that exceeds safety limits.\"",
+                    "C) \"In 2021 alone, ambient and household air pollution caused around 6.6 million premature deaths worldwide.\"",
+                    "D) \"These scientific data demonstrate that toxic emissions and industrial waste present severe risks...\"",
+                    "E) \"Therefore, resolving environmental degradation requires international cooperation...\""
+                ],
+                correct: 0, // A
+                explanation: "A opção A utiliza a conjunção condicional 'if' acompanhada de verbos no passado (implemented, invested), formando a estrutura da Segunda Condicional (Second Conditional) para introduzir um cenário hipotético."
+            },
+            // Q3: Poem Desillusion - Condition to overcome grief (Correct: E)
+            {
+                id: 3,
+                enunciado: "No poema de estilo romântico apresentado, o eu lírico expressa uma profunda desilusão com o estado de egoísmo do mundo. No entanto, no segundo verso, o autor insere a conjunção condicional \"If\" para estabelecer uma hipótese de transformação. A condição indispensável apresentada para que a tristeza (\"dark grief\") seja superada é:",
+                options: [
+                    "A) A aceitação do egoísmo humano como um fato inevitável da vida em sociedade.",
+                    "B) A destruição completa da terra fria e a busca por um novo refúgio.",
+                    "C) A busca por isolamento individual para evitar o sofrimento provocado pelos outros.",
+                    "D) O esquecimento do passado para que o duelo contra a dor seja vencido.",
+                    "E) O retorno do sentimento de amor às relações humanas."
+                ],
+                correct: 4, // E
+                explanation: "No verso \"If love returned, dark grief would step aside\", a oração condicional iniciada por 'If' estabelece que o retorno do amor é a condição necessária para que a tristeza seja afastada."
+            },
+            // Q4: Reported Speech - Imperative with 'now' (Correct: B)
+            {
+                id: 4,
+                enunciado: "Considere a frase no discurso direto: \"Clean your desk and finish the report now!\" — said the manager to the assistant.<br><br>Assinale a alternativa que transmite essa mesma instrução no discurso indireto (Reported Speech), realizando as adaptações adequadas ao novo contexto:",
+                options: [
+                    "A) The manager said to the assistant to clean his desk and finish the report now.",
+                    "B) The manager told the assistant to clean his desk and finish the report then.",
+                    "C) The manager asked if the assistant cleans his desk and finishes the report at that time.",
+                    "D) The manager suggested that the assistant should clean his desk and finish the report now.",
+                    "E) The manager ordered the assistant cleaning his desk and finishing the report then."
+                ],
+                correct: 1, // B
+                explanation: "Ordens no imperativo no discurso indireto usam a estrutura 'told/ordered + pessoa + to + verbo no infinitivo'. Além disso, o advérbio de tempo 'now' muda para 'then'."
+            },
+            // Q5: Reported Speech - Negative Imperative (Correct: D)
+            {
+                id: 5,
+                enunciado: "Considere a frase dita no discurso direto por um instrutor de laboratório: \"Don't touch those delicate wires now!\"<br><br>Assinale a alternativa que realiza a transposição correta dessa ordem proibitiva para o discurso indireto (Reported Speech):",
+                options: [
+                    "A) The instructor requested the students don't touch those delicate wires then.",
+                    "B) The instructor told the students to not touch these delicate wires now.",
+                    "C) The instructor asked the students that they didn't touch those delicate wires then.",
+                    "D) The instructor warned the students not to touch those delicate wires then.",
+                    "E) The instructor ordered to the students not touching those delicate wires at that time."
+                ],
+                correct: 3, // D
+                explanation: "O imperativo negativo (\"Don't touch\") transforma-se em \"not to touch\" no discurso indireto, e a palavra \"now\" é alterada para \"then\"."
+            },
+            // Q6: Reported Speech - Interrogative with 'if' (Correct: A)
+            {
+                id: 6,
+                enunciado: "Considere a pergunta direta: \"Did you receive the updated schedule yesterday?\" — asked Sarah to her colleague.<br><br>Ao transformar uma pergunta direta (Yes/No Question) em discurso indireto usando a conjunção \"if\", a oração deve perder a estrutura interrogativa e assumir a ordem declarativa no tempo passado correspondente. Assinale a alternativa correta:",
+                options: [
+                    "A) Sarah asked her colleague if he had received the updated schedule the day before.",
+                    "B) Sarah asked her colleague if did he receive the updated schedule the day before.",
+                    "C) Sarah asked her colleague if he receives the updated schedule yesterday.",
+                    "D) Sarah asked her colleague if had he received the updated schedule yesterday.",
+                    "E) Sarah asked her colleague if he has received the updated schedule the day before."
+                ],
+                correct: 0, // A
+                explanation: "No discurso indireto, perguntas diretas no Simple Past (\"Did you receive\") recuam para o Past Perfect (\"had received\") na ordem direta (sujeito + verbo). A palavra \"yesterday\" muda para \"the day before\"."
+            },
+            // Q7: Zero Conditional (Correct: C)
+            {
+                id: 7,
+                enunciado: "A estrutura da Zero Conditional (If + Simple Present, Simple Present) é utilizada para expressar verdades universais, leis científicas ou conclusões lógicas incontestáveis. Assinale a única alternativa que representa uma conclusão lógica e científica formulada corretamente:",
+                options: [
+                    "A) If you will heat water to 100 degrees Celsius, it would boil immediately.",
+                    "B) If you heated water to 100 degrees Celsius, it will boil tomorrow.",
+                    "C) If you heat water to 100 degrees Celsius at sea level, it boils.",
+                    "D) If you heat water to 100 degrees Celsius, it boiled without heat.",
+                    "E) If you heat water to 100 degrees Celsius, it is boiling yesterday."
+                ],
+                correct: 2, // C
+                explanation: "A alternativa C emprega o Simple Present em ambas as orações (heat / boils), atendendo perfeitamente à regra da Zero Conditional para leis da física."
+            },
+            // Q8: First Conditional (Correct: E)
+            {
+                id: 8,
+                enunciado: "A First Conditional (If + Simple Present, Will + Verb) retrata situações possíveis ou prováveis de acontecerem no futuro, dependendo de uma condição real. Assinale a alternativa que apresenta uma possibilidade real de futuro:",
+                options: [
+                    "A) If it rained cats and dogs yesterday, we will stay at home right now.",
+                    "B) If the weather was fine tomorrow, we would have a picnic yesterday.",
+                    "C) If the weather will be fine, we had a picnic in the park.",
+                    "D) If the weather is fine tomorrow, we had had a picnic in the park.",
+                    "E) If the weather is fine tomorrow, we will have a picnic in the park."
+                ],
+                correct: 4, // E
+                explanation: "A opção E segue o padrão da First Conditional: oração condicional no presente (is fine) projetando uma consequência provável no futuro (will have)."
+            },
+            // Q9: Second Conditional - Unreal situation (Correct: C)
+            {
+                id: 9,
+                enunciado: "A Second Conditional (If + Simple Past, Would + Verb) expressa cenários hipotéticos, imaginários ou contrários à realidade atual. Assinale a alternativa que descreve uma situação irreal/hipotética:",
+                options: [
+                    "A) If I have enough money, I buy a ticket for the movie every Friday.",
+                    "B) If I find a million dollars on the street, I donated half to charity yesterday.",
+                    "C) If I found a million dollars on the street today, I would donate half to charity.",
+                    "D) If I will find a million dollars on the street, I will buy a car.",
+                    "E) If I had found a million dollars last year, I will donate half today."
+                ],
+                correct: 2, // C
+                explanation: "A combinação do Simple Past na condição (found) com o modal 'would donate' na oração principal expressa uma hipótese irreal no presente."
+            },
+            // Q10: Second Conditional Completion (Correct: A)
+            {
+                id: 10,
+                enunciado: "Considere o seguinte trecho condicional:<br><br><strong class=\"text-red-700\">\"If I went to Paris this weekend...\"</strong><br><br>Assinale a alternativa que completa o trecho de forma gramaticalmente coerente com a Second Conditional:",
+                options: [
+                    "A) ...I would visit the Eiffel Tower and take many photos.",
+                    "B) ...I will visit the Eiffel Tower and take many photos.",
+                    "C) ...I have visited the Eiffel Tower and take many photos.",
+                    "D) ...I visited the Eiffel Tower and will take many photos.",
+                    "E) ...I would have visited the Eiffel Tower yesterday."
+                ],
+                correct: 0, // A
+                explanation: "Como a oração condicional utiliza o Simple Past ('went'), a oração principal na Second Conditional exige 'would + verbo principal' (would visit)."
+            }
+        ];
+
+        // State Tracking
+        let currentIdx = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let checkedStatus = new Array(questionsData.length).fill(false);
+
+        // DOM Elements
+        const navGrid = document.getElementById('nav-grid');
+        const answeredCountEl = document.getElementById('answered-count');
+        const readingBoxPollution = document.getElementById('reading-box-pollution');
+        const readingBoxPoem = document.getElementById('reading-box-poem');
+        
+        const questionNumberBadge = document.getElementById('question-number-badge');
+        const questionEnunciado = document.getElementById('question-enunciado');
+        const optionsContainer = document.getElementById('options-container');
+        
+        const feedbackBox = document.getElementById('feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackMessage = document.getElementById('feedback-message');
+
+        const prevBtn = document.getElementById('prev-btn');
+        const checkBtn = document.getElementById('check-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finishQuizBtn = document.getElementById('finish-quiz-btn');
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        const quizView = document.getElementById('quiz-view');
+        const reportScreen = document.getElementById('report-screen');
+
+        // Sidebar Toggle
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+
+        // Initialize App
+        function initApp() {
+            renderNavGrid();
+            loadQuestion(0);
+        }
+
+        function renderNavGrid() {
+            navGrid.innerHTML = '';
+            questionsData.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `nav-btn-${idx}`;
+                btn.className = `w-full aspect-square font-bold text-xs rounded-lg transition border ${getNavStyle(idx)}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => loadQuestion(idx);
+                navGrid.appendChild(btn);
+            });
+            
+            const answeredNum = userAnswers.filter(a => a !== null).length;
+            answeredCountEl.innerText = `${answeredNum}/10 respondidas`;
+        }
+
+        function getNavStyle(idx) {
+            const isCurrent = idx === currentIdx;
+            const isChecked = checkedStatus[idx];
+            const ans = userAnswers[idx];
+            const q = questionsData[idx];
+
+            let activeRing = isCurrent ? 'ring-2 ring-white ring-offset-2 ring-offset-slate-800 ' : '';
+
+            if (isChecked) {
+                if (ans === q.correct) {
+                    return activeRing + 'bg-emerald-600 text-white border-emerald-500';
+                } else {
+                    return activeRing + 'bg-rose-600 text-white border-rose-500';
+                }
+            } else if (ans !== null) {
+                return activeRing + 'bg-amber-500 text-white border-amber-400';
+            } else {
+                return activeRing + 'btn-sas-red border-red-700';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentIdx = idx;
+            const q = questionsData[idx];
+
+            // Hide report, show quiz
+            reportScreen.classList.add('hidden');
+            quizView.classList.remove('hidden');
+
+            // Show Reading Box for Q1 & Q2, Poem for Q3, Hide for others
+            if (idx === 0 || idx === 1) {
+                readingBoxPollution.classList.remove('hidden');
+                readingBoxPoem.classList.add('hidden');
+            } else if (idx === 2) {
+                readingBoxPollution.classList.add('hidden');
+                readingBoxPoem.classList.remove('hidden');
+            } else {
+                readingBoxPollution.classList.add('hidden');
+                readingBoxPoem.classList.add('hidden');
+            }
+
+            // Header info
+            questionNumberBadge.innerText = `Questão ${q.id < 10 ? '0' + q.id : q.id}`;
+            questionEnunciado.innerHTML = q.enunciado;
+
+            // Render options
+            optionsContainer.innerHTML = '';
+            const isChecked = checkedStatus[idx];
+            const selectedOpt = userAnswers[idx];
+
+            q.options.forEach((optText, optIdx) => {
+                const optBtn = document.createElement('button');
+                optBtn.className = `w-full text-left p-3.5 rounded-lg border text-xs sm:text-sm font-medium transition-all flex items-center justify-between ${getOptionStyle(idx, optIdx)}`;
+                
+                optBtn.innerHTML = `
+                    <span class="text-black">${optText}</span>
+                    <span>${getOptionIcon(idx, optIdx)}</span>
+                `;
+
+                if (!isChecked) {
+                    optBtn.onclick = () => selectOption(optIdx);
+                }
+
+                optionsContainer.appendChild(optBtn);
+            });
+
+            // Feedback display
+            if (isChecked) {
+                feedbackBox.classList.remove('hidden');
+                if (selectedOpt === q.correct) {
+                    feedbackBox.className = "p-4 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-900 mb-2";
+                    feedbackIcon.className = "fa-solid fa-circle-check text-emerald-600 text-xl";
+                    feedbackTitle.innerText = "Resposta Correta!";
+                } else {
+                    feedbackBox.className = "p-4 rounded-lg bg-rose-50 border border-rose-300 text-rose-900 mb-2";
+                    feedbackIcon.className = "fa-solid fa-circle-xmark text-rose-600 text-xl";
+                    feedbackTitle.innerText = "Resposta Incorreta";
+                }
+                feedbackMessage.innerText = q.explanation;
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Button state
+            prevBtn.disabled = (idx === 0);
+            prevBtn.classList.toggle('opacity-50', idx === 0);
+
+            nextBtn.disabled = (idx === questionsData.length - 1);
+            nextBtn.classList.toggle('opacity-50', idx === questionsData.length - 1);
+
+            renderNavGrid();
+        }
+
+        function getOptionStyle(qIdx, optIdx) {
+            const isChecked = checkedStatus[qIdx];
+            const selectedOpt = userAnswers[qIdx];
+            const q = questionsData[qIdx];
+
+            if (isChecked) {
+                if (optIdx === q.correct) {
+                    return 'bg-emerald-100 border-emerald-500 font-semibold';
+                }
+                if (optIdx === selectedOpt && selectedOpt !== q.correct) {
+                    return 'bg-rose-100 border-rose-500 font-semibold';
+                }
+                return 'bg-slate-50 border-slate-200 opacity-60';
+            } else {
+                if (optIdx === selectedOpt) {
+                    return 'bg-red-50 border-red-500 font-semibold ring-1 ring-red-500';
+                }
+                return 'bg-white border-slate-300 hover:bg-slate-50';
+            }
+        }
+
+        function getOptionIcon(qIdx, optIdx) {
+            const isChecked = checkedStatus[qIdx];
+            const selectedOpt = userAnswers[qIdx];
+            const q = questionsData[qIdx];
+
+            if (isChecked) {
+                if (optIdx === q.correct) {
+                    return '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                }
+                if (optIdx === selectedOpt && selectedOpt !== q.correct) {
+                    return '<i class="fa-solid fa-circle-xmark text-rose-600"></i>';
+                }
+            } else if (optIdx === selectedOpt) {
+                return '<i class="fa-solid fa-circle-dot text-red-600"></i>';
+            }
+            return '<i class="fa-regular fa-circle text-slate-300"></i>';
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentIdx] = optIdx;
+            loadQuestion(currentIdx);
+        }
+
+        function checkCurrentQuestion() {
+            if (userAnswers[currentIdx] === null) {
+                alert("Por favor, selecione uma opção antes de checar.");
+                return;
+            }
+            checkedStatus[currentIdx] = true;
+            loadQuestion(currentIdx);
+        }
+
+        // Navigation Listeners (Order: NEXT, CHECK, PREVIOUS)
+        nextBtn.addEventListener('click', () => {
+            if (currentIdx < questionsData.length - 1) loadQuestion(currentIdx + 1);
+        });
+
+        checkBtn.addEventListener('click', () => {
+            checkCurrentQuestion();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIdx > 0) loadQuestion(currentIdx - 1);
+        });
+
+        finishQuizBtn.addEventListener('click', () => {
+            showReport();
+        });
+
+        // Final Report Evaluation (Grade out of 8.0)
+        function showReport() {
+            quizView.classList.add('hidden');
+            readingBoxPollution.classList.add('hidden');
+            readingBoxPoem.classList.add('hidden');
+            reportScreen.classList.remove('hidden');
+
+            let totalCorrect = 0;
+            let readingCorrect = 0; // Q1-Q3
+            let reportedSpeechCorrect = 0; // Q4-Q6
+            let conditionalsCorrect = 0; // Q7-Q10
+
+            questionsData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) {
+                    totalCorrect++;
+                    if (idx < 3) readingCorrect++;
+                    else if (idx < 6) reportedSpeechCorrect++;
+                    else conditionalsCorrect++;
+                }
+            });
+
+            // Grade calculation out of 8.0 (each question = 0.8 points)
+            const finalGrade = (totalCorrect * 0.8).toFixed(1);
+            const totalErrors = questionsData.length - totalCorrect;
+            const accuracyPct = Math.round((totalCorrect / questionsData.length) * 100);
+            const errorPct = 100 - accuracyPct;
+
+            const readingPct = Math.round((readingCorrect / 3) * 100);
+            const reportedPct = Math.round((reportedSpeechCorrect / 3) * 100);
+            const conditionalsPct = Math.round((conditionalsCorrect / 4) * 100);
+
+            reportScreen.innerHTML = `
+                <div class="sas-card p-6 sm:p-8 shadow-2xl">
+                    <div class="text-center pb-6 border-b border-red-200 mb-6">
+                        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            Resultado Final
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                            Relatório de Desempenho
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1">Simulado Modelo SAS — Língua Inglesa 9º Ano</p>
+                    </div>
+
+                    <!-- Grade Display Box -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-50 border-2 border-red-500 rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Nota Alcançada</span>
+                            <span class="text-5xl font-black text-red-600 my-1">${finalGrade} <span class="text-xl text-slate-400 font-normal">/ 8,0</span></span>
+                            <span class="text-xs font-semibold text-slate-600">${totalCorrect} de 10 questões corretas (${accuracyPct}%)</span>
+                        </div>
+
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-center space-y-3">
+                            <h4 class="font-bold text-xs text-slate-800 uppercase tracking-wider">Estatística Geral</h4>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-600">Acertos:</span>
+                                <span class="font-bold text-emerald-600">${totalCorrect} (${accuracyPct}%)</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-600">Erros:</span>
+                                <span class="font-bold text-rose-600">${totalErrors} (${errorPct}%)</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden flex">
+                                <div class="bg-emerald-500 h-full" style="width: ${accuracyPct}%"></div>
+                                <div class="bg-rose-500 h-full" style="width: ${errorPct}%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Diagnostics -->
+                    <div class="mb-8">
+                        <h3 class="text-base font-bold text-slate-900 mb-3 border-b border-slate-200 pb-2">
+                            Diagnóstico por Tópico
+                        </h3>
+                        <div class="space-y-3">
+                            ${getDiagnosticHTML('Compreensão de Texto e Poesia', readingPct, 'Foco em identificação de intenção do autor e contexto condicional em textos.')}
+                            ${getDiagnosticHTML('Discurso Indireto (Reported Speech)', reportedPct, 'Revisar mudanças temporais, imperativo e estrutura de perguntas com "if".')}
+                            ${getDiagnosticHTML('Orações Condicionais (0, 1st, 2nd)', conditionalsPct, 'Revisar diferenças entre verdades gerais (Zero), futuro real (1st) e hipóteses (2nd).')}
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="text-center pt-4 border-t border-slate-200">
+                        <button onclick="resumeQuiz()" class="px-6 py-2.5 btn-sas-red rounded-lg text-sm shadow">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Voltar às Questões
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getDiagnosticHTML(title, pct, advice) {
+            const isLow = pct < 70;
+            return `
+                <div class="p-3.5 rounded-lg ${isLow ? 'bg-rose-50 border border-rose-300' : 'bg-emerald-50 border border-emerald-300'} flex items-start space-x-3">
+                    <i class="fa-solid ${isLow ? 'fa-triangle-exclamation text-rose-600' : 'fa-circle-check text-emerald-600'} text-base mt-0.5"></i>
+                    <div class="text-xs sm:text-sm">
+                        <span class="font-bold text-slate-900">${title}: ${pct}% de aproveitamento</span>
+                        <p class="text-slate-600 mt-0.5">${isLow ? '⚠️ RECOMENDAÇÃO DE REVISÃO: ' + advice : '✓ Ótimo desempenho neste conteúdo!'}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resumeQuiz() {
+            reportScreen.classList.add('hidden');
+            quizView.classList.remove('hidden');
+            loadQuestion(currentIdx);
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
